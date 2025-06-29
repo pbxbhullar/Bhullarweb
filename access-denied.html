@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Access Denied - Security Protection</title>
+    <meta name="description" content="Access denied due to security violation. Learn why this happened and how to resolve it.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&f[]=array@400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #dc2626;
+            --secondary-color: #991b1b;
+            --accent-color: #fca5a5;
+            --bg-color: #0f0f0f;
+            --text-color: #ffffff;
+            --glass-bg: rgba(220, 38, 38, 0.1);
+            --glass-border: rgba(220, 38, 38, 0.2);
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, 
+                rgba(220, 38, 38, 0.1) 0%, 
+                rgba(153, 27, 27, 0.05) 25%, 
+                rgba(252, 165, 165, 0.03) 50%, 
+                rgba(220, 38, 38, 0.05) 75%, 
+                rgba(153, 27, 27, 0.1) 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Warning orbs */
+        .warning-orb {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.3) 0%, rgba(153, 27, 27, 0.1) 50%, transparent 100%);
+            filter: blur(2px);
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .warning-orb:nth-child(1) {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .warning-orb:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            top: 70%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .warning-orb:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0.4;
+            }
+            33% {
+                transform: translateY(-15px) translateX(8px);
+                opacity: 0.6;
+            }
+            66% {
+                transform: translateY(8px) translateX(-8px);
+                opacity: 0.3;
+            }
+        }
+
+        /* Main container */
+        .access-denied-container {
+            max-width: 600px;
+            width: 90%;
+            background: rgba(220, 38, 38, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
+            animation: slide-up 0.8s ease forwards;
+        }
+
+        @keyframes slide-up {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Warning icon */
+        .warning-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse-warning 2s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+        }
+
+        @keyframes pulse-warning {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 40px rgba(220, 38, 38, 0.7);
+            }
+        }
+
+        .warning-icon svg {
+            width: 40px;
+            height: 40px;
+            color: white;
+        }
+
+        /* Typography */
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #dc2626;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Reason sections */
+        .reasons-container {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .reason-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .reason-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(220, 38, 38, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .reason-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fca5a5;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reason-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Info section */
+        .info-section {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .info-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #60a5fa;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .info-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Action buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .action-button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .primary-button {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+        }
+
+        .secondary-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .security-footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 640px) {
+            .access-denied-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-button {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles */
+        .action-button:focus-visible {
+            outline: 2px solid rgba(220, 38, 38, 0.8);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background animation -->
+    <div class="background-animation"></div>
+    
+    <!-- Warning orbs -->
+    <div class="warning-orb"></div>
+    <div class="warning-orb"></div>
+    <div class="warning-orb"></div>
+
+    <!-- Main content -->
+    <div class="access-denied-container">
+        <!-- Warning icon -->
+        <div class="warning-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                <path d="M12 9v4"/>
+                <path d="m12 17 .01 0"/>
+            </svg>
+        </div>
+
+        <!-- Main title -->
+        <h1 class="main-title">Access Denied</h1>
+        <p class="subtitle">Your access has been restricted due to security policy violations</p>
+
+        <!-- Reasons section -->
+        <div class="reasons-container">
+            <div class="reason-item">
+                <div class="reason-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <circle cx="12" cy="16" r="1"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    Developer Tools Detection
+                </div>
+                <div class="reason-description">
+                    Our security system detected the use of browser developer tools, which is restricted to protect the website's intellectual property and prevent unauthorized access to source code.
+                </div>
+            </div>
+
+            <div class="reason-item">
+                <div class="reason-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                    Suspicious Activity
+                </div>
+                <div class="reason-description">
+                    Multiple security violations were detected from your connection, including attempts to access restricted resources or bypass security measures.
+                </div>
+            </div>
+
+            <div class="reason-item">
+                <div class="reason-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    Automated Access Attempt
+                </div>
+                <div class="reason-description">
+                    Your connection exhibited patterns consistent with automated tools, bots, or scraping attempts, which are blocked to maintain site security and performance.
+                </div>
+            </div>
+        </div>
+
+        <!-- Information section -->
+        <div class="info-section">
+            <div class="info-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4"/>
+                    <path d="M12 8h.01"/>
+                </svg>
+                Why These Security Measures Exist
+            </div>
+            <ul class="info-list">
+                <li>Protect intellectual property and source code</li>
+                <li>Prevent unauthorized data extraction</li>
+                <li>Maintain website performance and stability</li>
+                <li>Comply with security best practices</li>
+                <li>Protect against malicious attacks</li>
+            </ul>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="action-buttons">
+            <a href="/" class="action-button primary-button">Return to Homepage</a>
+            <button onclick="window.history.back()" class="action-button secondary-button">Go Back</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="security-footer">
+            <p><strong>Security ID:</strong> <span id="securityId"></span></p>
+            <p>If you believe this is an error, please contact the website administrator.</p>
+            <p>This security measure helps protect the website and its users.</p>
+        </div>
+    </div>
+
+    <script>
+        // Generate a unique security ID for this incident
+        function generateSecurityId() {
+            const timestamp = Date.now().toString(36);
+            const random = Math.random().toString(36).substr(2, 5);
+            return `SEC-${timestamp}-${random}`.toUpperCase();
+        }
+
+        // Set security ID
+        document.getElementById('securityId').textContent = generateSecurityId();
+
+        // Prevent common bypass attempts
+        document.addEventListener('keydown', function(e) {
+            // Disable F12, Ctrl+Shift+I, Ctrl+U, etc.
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && e.keyCode === 73) ||
+                (e.ctrlKey && e.keyCode === 85)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Disable text selection
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Log the access attempt
+        try {
+            fetch('/security-monitor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    type: 'access_denied_page_view',
+                    severity: 'medium',
+                    timestamp: new Date().toISOString()
+                })
+            }).catch(() => {
+                // Silently fail
+            });
+        } catch (e) {
+            // Silently fail
+        }
+    </script>
+</body>
+</html>
